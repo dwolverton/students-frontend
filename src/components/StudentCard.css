@@ -1,0 +1,38 @@
+.StudentCard {
+  border: 2px solid silver;
+  border-radius: 8px;
+  width: 200px;
+  padding: 16px 16px 4px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.StudentCard h3 {
+  margin: 0;
+}
+
+.StudentCard__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.StudentCard__label {
+  font-weight: bold;
+}
+
+.StudentCard__attendance {
+  font-style: italic;
+  background: transparent;
+  border: none;
+  font-size: 100%;
+}
+
+.StudentCard__absent {
+  font-style: italic;
+  color: crimson;
+}
+
+.StudentCard__photo {
+  width: 100%;
+}

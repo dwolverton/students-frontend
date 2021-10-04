@@ -1,0 +1,4 @@
+.StudentForm label:first-child {
+  font-weight: bold;
+  margin-right: .5em;
+}
