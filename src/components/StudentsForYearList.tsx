@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Student from "../model/Student";
 import { deleteStudent, readStudentsByYear } from "../service/StudentApiService";
@@ -15,23 +15,23 @@ function StudentsForYearList() {
   const [ students, setStudents ] = useState<Student[]>([]);
   const [ studentsLoaded, setStudentsLoaded ] = useState(false);
 
-  // useEffect runs once when our componet loads.
-  useEffect(() => {
-    // load our initial data here.
-    loadStudents(year);
-  }, [year]);
-
-  function loadStudents(year: number) {
+  const loadStudents = useCallback(function () {
     readStudentsByYear(year).then(studentsFromApi => {
       setStudents(studentsFromApi);
       setStudentsLoaded(true);
     });
-  }
+  }, [ year ]); // loadStudents depends on year
+
+  // useEffect runs once when our componet loads.
+  useEffect(() => {
+    // load our initial data here.
+    loadStudents();
+  }, [loadStudents]); // useEffect depends on loadStudents
 
   // Use the ! (non-null assertion) TypeScript operator to tell TypeScript
   // that we know the _id will not be undefined. (see below)
   function handleDeleteStudent(studentId: string): void {
-    deleteStudent(studentId).then(() => loadStudents(year));
+    deleteStudent(studentId).then(loadStudents);
   }
 
   return (
